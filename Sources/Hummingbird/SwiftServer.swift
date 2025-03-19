@@ -10,12 +10,16 @@ import Hummingbird
 @main
 struct SwiftServer {
 
-		static func main() async throws {
+		static 
+		func main() async throws {
 			print("Server started...")
 			// create router and add a single GET /hello route
 			let router = Router()
 			router.get("hello") { request, _ -> String in
-			    return "Hello Ryan"
+			    return "Hello from Hummingbird"
+			}
+			router.get("goodbye") { _,_ -> String in 
+					return "Goodbye from Hummingbird"
 			}
 			// create application using router
 			let app = Application(
@@ -23,7 +27,12 @@ struct SwiftServer {
 			    configuration: .init(address: .hostname("127.0.0.1", port: 8080))
 			)
 			// run hummingbird application
-			try await app.runService()
+            // This is a test comment
+			do {
+					try await app.runService()
+			} catch {
+					print(error)
+			}
 
 		}
 }
