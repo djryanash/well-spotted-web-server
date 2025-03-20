@@ -21,13 +21,16 @@ struct SwiftServer {
 			router.get("goodbye") { _,_ -> String in 
 					return "Goodbye from Hummingbird"
 			}
+			router.get("/who/**") { request, context in
+    				// return catchAll captured string
+    				return context.parameters.getCatchAll().joined(separator: "/")
+			}	
 			// create application using router
 			let app = Application(
 			    router: router,
 			    configuration: .init(address: .hostname("127.0.0.1", port: 8080))
 			)
 			// run hummingbird application
-            // This is a test comment
 			do {
 					try await app.runService()
 			} catch {
