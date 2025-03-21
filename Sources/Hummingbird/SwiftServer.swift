@@ -28,7 +28,7 @@ struct SwiftServer {
 			// create application using router
 			let app = Application(
 			    router: router,
-			    configuration: .init(address: .hostname("127.0.0.1", port: 8080))
+			    configuration: .init(address: .hostname("0.0.0.0", port: 8080))
 			)
 			// run hummingbird application
 			do {
